@@ -5,12 +5,9 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ProfilePage from "../pages/ProfilePage";
+import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticated";
 
 const router = createBrowserRouter([
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
   {
     path: "/",
     element: <Layout />,
@@ -21,8 +18,16 @@ const router = createBrowserRouter([
       { path: "profile/:profileId", element: <ProfilePage /> },
     ],
   },
+  {
+    path: "/login",
+    element: (
+      <RedirectIfAuthenticated>
+        <LoginPage />,
+      </RedirectIfAuthenticated>
+    ),
+  },
 ]);
 
 export default function Route() {
-    return <RouterProvider router={router}/>
+  return <RouterProvider router={router} />;
 }
