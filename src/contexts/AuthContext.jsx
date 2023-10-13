@@ -6,27 +6,37 @@ export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
   const [authUser, setAuthUser] = useState(null);
+  const [initiallLoading, setInitiallLoading] = useState(true);
 
   useEffect(() => {
     if (getAccessToken()) {
-      axios.get("/auth/me").then((res) => {
-        setAuthUser(res.data.user);
-      });
+      axios
+        .get("/auth/me")
+        .then((res) => {
+          setAuthUser(res.data.user);
+        })
+        .finally(() => {
+          setInitiallLoading(false);
+        });
+    } else {
+      setInitiallLoading(false);
     }
   }, []);
 
   const login = async (credential) => {
-    try {
-      const res = await axios.post("/auth/login", credential);
-      console.log(res);
-      addAccessToken(res.data.accessToken);
-      setAuthUser(res.data.user);
-    } catch (err) {
-      console.log(err);
-    }
+    const res = await axios.post("/auth/login", credential);
+    addAccessToken(res.data.accessToken);
+    setAuthUser(res.data.user);
+  };
+  const register = async (registerInputObject) => {
+    const res = await axios.post("/auth/register", registerInputObject);
+    addAccessToken(res.data.accessToken);
+    setAuthUser(res.data.user);
   };
   return (
-    <AuthContext.Provider value={{ login, authUser }}>
+    <AuthContext.Provider
+      value={{ login, authUser, initiallLoading, register }}
+    >
       {children}
     </AuthContext.Provider>
   );

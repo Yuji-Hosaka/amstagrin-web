@@ -3,7 +3,7 @@ export default function LoginContent() {
     <div className=" max-w-[25rem] flex-1 min-[900px]:pt-[4.5rem] min-[1075px]:max-w-[36.25rem]">
       <div className=" pb-5 flex justify-center min-[900px]:pb-4 min-[900px]:justify-start">
         <img
-          src="/ams-logo.png"
+          src="/logo/ams-logo.png"
           className=" -m-7 h-[6.625rem]"
           alt="amstagrin-logo"
         />

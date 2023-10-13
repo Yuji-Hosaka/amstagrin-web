@@ -1,16 +1,23 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "../layout/Layout";
 import FollowerPage from "../pages/FollowerPage";
 import FollowingPage from "../pages/FollowingPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ProfilePage from "../pages/ProfilePage";
 import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticated";
+import Authenticated from "../features/auth/Authenticated";
+import RegisterPage from "../pages/RegisterPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <Authenticated>
+        <Layout />,
+      </Authenticated>
+    ),
+
     children: [
       { path: "", element: <HomePage /> },
       { path: "follower", element: <FollowerPage /> },
@@ -26,6 +33,12 @@ const router = createBrowserRouter([
       </RedirectIfAuthenticated>
     ),
   },
+  {
+    path: '/register',
+    element: (
+      <RegisterPage/>
+    )
+  }
 ]);
 
 export default function Route() {
