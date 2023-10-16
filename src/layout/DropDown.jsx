@@ -31,7 +31,7 @@ export default function DropDown() {
       </div>
 
       {isOpen && (
-        <div className=" w-96 absolute bg-white right-0 translate-y-1 border rounded-xl shadow-xl p-2 ">
+        <div className=" w-96 absolute bg-white left-0 translate-y-1 border rounded-xl shadow-xl p-2">
           {/* <Link to="/login">
             <div className=" font-semibold flex gap-4 p-2 items-center cursor-pointer hover:bg-gray-100 rounded-xl "> Switch Accounts</div>
           </Link> */}

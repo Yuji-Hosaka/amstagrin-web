@@ -1,5 +1,15 @@
+import SideBar from "../layout/SideBar";
+
 export default function HomePage() {
   return (
-    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex incidunt sit animi! At, hic repellat. Ut nam illo nostrum perspiciatis soluta delectus quasi omnis, aut reprehenderit. Voluptate doloremque vel aperiam!</h1>
+    <div className="flex  ">
+      <div className="h-100">
+
+      <SideBar/>
+      </div>
+      <h1 className=" text-pink-600 text-5xl text-center w-full">
+        Following Post
+      </h1>
+    </div>
   )
 }
