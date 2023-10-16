@@ -1,14 +1,30 @@
 import { CgDetailsMore } from "react-icons/cg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../hooks/use-auth";
 
 export default function DropDown() {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useAuth();
 
+  const dropDownEl = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!dropDownEl.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className=" relative">
+    <div className=" relative" ref={dropDownEl}>
       <div className=" cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
         <CgDetailsMore />
       </div>
@@ -18,14 +34,12 @@ export default function DropDown() {
           <Link to="/login">
             <div className=" font-semibold"> Switch Accounts</div>
           </Link>
-          <hr className=" m-2 border" />
+         
           <div
             className=" flex gap-4 p-2 items-center cursor-pointer hover:bg-gray-100 rounded-xl"
             onClick={logout}
           >
-            <div className=" bg-gray-300 h-9 aspect-square rounded-full flex justify-center items-center">
-              {/* <CgDetailsMore /> */}
-            </div>
+            
             <div className=" font-semibold"> Log out</div>
           </div>
         </div>
