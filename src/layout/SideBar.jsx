@@ -1,26 +1,30 @@
-import LogoAM from '../components/LogoAM'
-import DropDown from '../layout/DropDown'
+import LogoAM from "../components/LogoAM";
+import { AiFillHome } from "react-icons/ai";
+import {MdOutlineAddBox,MdOutlineExplore} from 'react-icons/md'
+import {BsPersonCircle,BsSearch} from 'react-icons/bs'
+import MenuSidebarItem from "./MenuSidebarItem";
+import DropDown from "./DropDown";
 
 export default function SideBar() {
   return (
-    <div className="drawer lg:drawer-open border">
-  <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-  <div className="drawer-content flex flex-col items-center justify-center">
+    <div className=" flex flex-col  bg-white h-full">
+      <div className="self-center pt-10">
+        <LogoAM />
+      </div>
 
-    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-    <LogoAM/>
-  
-  </div> 
-  <div className="drawer-side">
-    <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label> 
-    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-      {/* Sidebar content here */}
-      <li><a>Sidebar Item 1</a></li>
-      <li><a>Sidebar Item 2</a></li>
-      <DropDown/>
-    </ul>
-  
-  </div>
-</div>
-  )
+      <div className="flex flex-col justify-between  h-full p-10">
+        <div className=" flex flex-col gap-6 pt-10 ">
+          <MenuSidebarItem Icon={AiFillHome} text={"Home"} />
+          <MenuSidebarItem Icon={BsSearch} text={"Search"} />
+          <MenuSidebarItem Icon={MdOutlineExplore} text={"Explore"} />
+          <MenuSidebarItem Icon={MdOutlineAddBox} text={"Create"} />
+          <MenuSidebarItem Icon={BsPersonCircle} text={"Profile"} />
+        </div>
+
+        <div className=" flex justify-start">
+          <DropDown />
+        </div>
+      </div>
+    </div>
+  );
 }
