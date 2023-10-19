@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import RegisterInput from "./RegisterInput";
 import InputErrorMessage from "./InputErrorMessage";
 import { useAuth } from "../../hooks/use-auth";
+import { useNavigate } from "react-router-dom";
 
 const registerSchema = Joi.object({
   emailOrMobile: Joi.alternatives([
@@ -44,8 +45,12 @@ export default function RegisterForm() {
 
   const { register } = useAuth();
 
+  const navigate = useNavigate();
+
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
+
+    setError({ ...error, [e.target.name]: "" });
   };
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -53,10 +58,14 @@ export default function RegisterForm() {
     if (validationError) {
       return setError(validationError);
     }
-    setError({});
-    register(input).catch((err) => {
-      toast.error(err.response?.data.message);
-    });
+
+    register(input)
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        toast.error(err.response?.data.message);
+      });
   };
   return (
     <form
@@ -125,7 +134,7 @@ export default function RegisterForm() {
       </div>
 
       <div className=" mx-auto col-span-full">
-        <button className=" bg-green-500 rounded-lg text-white px-3 py-1.5 text-lg font-bold min-w-[10rem]">
+        <button className=" bg-pink-500 rounded-lg text-white px-3 py-1.5 text-lg font-bold min-w-[10rem]">
           Sign up
         </button>
       </div>

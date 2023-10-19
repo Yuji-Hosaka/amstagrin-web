@@ -34,11 +34,13 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/register',
+    path: "/register",
     element: (
-      <RegisterPage/>
-    )
-  }
+      <RedirectIfAuthenticated>
+        <RegisterPage />
+      </RedirectIfAuthenticated>
+    ),
+  },
 ]);
 
 export default function Route() {
